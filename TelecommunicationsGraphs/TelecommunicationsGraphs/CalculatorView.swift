@@ -13,6 +13,8 @@ struct CalculatorView: View {
     @State private var resistor: String = ""
     @State private var Vi: String = ""
     @State private var Ft: String = ""
+    @State private var F: String = ""
+
     
     @State private var result1: Double = 0.00
     @State private var result2: Double = 0.00
@@ -36,6 +38,7 @@ struct CalculatorView: View {
                             TextField("Enter capacitor", text: $capacitor)
                             TextField("Enter resistor", text: $resistor)
                             TextField("Enter Vi", text: $Vi)
+                            TextField("Enter f", text: $F)
 
                             
                            
@@ -53,7 +56,7 @@ struct CalculatorView: View {
                             
                         }
                         Button {
-                            calculation(Vi: Vi, C: capacitor, R: resistor)
+                            calculation(Vi: Vi, C: capacitor, R: resistor, F: F)
                         } label: {
                             Text("Calculate")
                         }.frame(maxWidth: .infinity, alignment: .center)
@@ -86,12 +89,12 @@ struct CalculatorView: View {
         }
     }
     
-    func calculation(Vi: String, C: String, R: String) {
-        if let validVi = Double(Vi), let validC = Double(C), let validR = Double(R) {
+     func calculation(Vi: String, C: String, R: String, F: String) {
+        if let validVi = Double(Vi), let validC = Double(C), let validR = Double(R), let validF = Double(F) {
 
             result3 = 1/(pi2*validR*validC)
             result4 = validVi/1.414
-            result5 = 1/sqrt(1+(pi*validR*validC))
+            result5 = 1/sqrt(1+(pi2*validF*validR*validC)*(pi2*validF*validR*validC))
             result6 = validVi*result5
             
         } else {
